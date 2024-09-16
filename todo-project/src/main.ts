@@ -13,6 +13,7 @@ let todos: Todo[] = []
 // Step 3: Create a reference to the HTML elements
 const todoInput = document.getElementById('todo-input') as HTMLInputElement
 const todoList = document.getElementById('todo-list') as HTMLUListElement
+const todoItem = document.querySelector('.todo-item') as HTMLLIElement
 const todoForm = document.querySelector('.todo-form') as HTMLFormElement
 
 // Step 4: Create a function to add new todos
@@ -34,14 +35,16 @@ const renderTodos = (): void => {
 
   todos.forEach(todo => {
     const li = document.createElement('li')
-    li.className = 'todo-item'
+    li.className = `todo-item`
     li.innerHTML = `
     <span>${todo.title}</span>
     <button>Remove</button>
-    <button id="editBtn">Edit</button>`;
-    
+    <button id="editBtn">Edit</button>
+    <button id="completeBtn">Complete</button>`;
+
     addRemoveButtonListener(li, todo.id)
     addEditButtonListener(li, todo.id)
+    addCompletedButtonListener(li, todo.id)
     todoList.appendChild(li)
   })
 }
@@ -87,11 +90,43 @@ const editTodo = (id: number) => {
   }
 }
 
+
+// Add button to change completed state of todo
+const addCompletedButtonListener = (li: HTMLLIElement, id: number) => {
+  const completeButton = li.querySelector('#completeBtn')
+  completeButton?.addEventListener('click', () => completeTodo(id))
+}
+
+const completeTodo = (id: number) => {
+  const todo = todos.find(todo => todo.id === id)
+  
+
+  if (todo) {
+    todo.completed = !todo.completed
+    if (todo.completed === true) {
+      todoList.style.color = 'lightgreen'
+      console.log(`todo: ${todo.id}`, todo.completed);
+    }
+    else { 
+      todoList.style.color = '#ffffffde'
+      console.log(`todo: ${todo.id}`, todo.completed);
+    }
+    renderTodos()
+    console.log(todos);
+
+  }
+}
+
+
+
+
+
+
 // Create a function for choosing background color for the body with a colorpicker
 
 const initializeColorPicker = (): void => {
   const colorPicker = document.getElementById('colorPicker') as HTMLInputElement
-  if(colorPicker) {
+  if (colorPicker) {
     colorPicker.addEventListener('input', (event: Event) => {
       const target = event.target as HTMLInputElement;
       changeBackgroundColor(target.value)
@@ -109,3 +144,4 @@ const changeBackgroundColor = (color: string): void => {
 document.addEventListener('DOMContentLoaded', () => {
   initializeColorPicker()
 })
+
