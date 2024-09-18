@@ -13,7 +13,7 @@ let todos: Todo[] = []
 // Step 3: Create a reference to the HTML elements
 const todoInput = document.getElementById('todo-input') as HTMLInputElement
 const todoList = document.getElementById('todo-list') as HTMLUListElement
-const todoItem = document.querySelector('.todo-item') as HTMLLIElement
+
 const todoForm = document.querySelector('.todo-form') as HTMLFormElement
 
 // Step 4: Create a function to add new todos
@@ -42,12 +42,19 @@ const renderTodos = (): void => {
     <button id="editBtn">Edit</button>
     <button id="completeBtn">Complete</button>`;
 
-    addRemoveButtonListener(li, todo.id)
-    addEditButtonListener(li, todo.id)
-    addCompletedButtonListener(li, todo.id)
-    todoList.appendChild(li)
+    addRemoveButtonListener(li, todo.id);
+    addEditButtonListener(li, todo.id);
+    addCompletedButtonListener(li, todo.id);
+    todoList.appendChild(li);
+
+    if (todo.completed === true) {
+      li.style.color = 'lightgreen'
+    }
+    
   })
 }
+
+
 
 renderTodos()
 
@@ -103,17 +110,7 @@ const completeTodo = (id: number) => {
 
   if (todo) {
     todo.completed = !todo.completed
-    if (todo.completed === true) {
-      todoList.style.color = 'lightgreen'
-      console.log(`todo: ${todo.id}`, todo.completed);
-    }
-    else { 
-      todoList.style.color = '#ffffffde'
-      console.log(`todo: ${todo.id}`, todo.completed);
-    }
     renderTodos()
-    console.log(todos);
-
   }
 }
 
