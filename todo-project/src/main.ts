@@ -52,7 +52,13 @@ const renderTodos = (): void => {
     }
     
   })
-}
+
+  const deleteCompletedBtn = document.getElementById('delete-completed-btn') as HTMLButtonElement
+  if (deleteCompletedBtn) {
+    // Check if any todos are completed and toggle the button's visibility
+    deleteCompletedBtn.style.display = todos.some(todo => todo.completed) ? 'block' : 'none'
+  }
+} 
 
 
 
@@ -113,6 +119,34 @@ const completeTodo = (id: number) => {
     renderTodos()
   }
 }
+
+renderTodos()
+
+// Add a button to clear all completed todos
+
+// Function to filter out todos with status "completed" and return the ones not completed
+const deleteCompletedTodos = () => {
+  todos = todos.filter(todo => !todo.completed)
+  renderTodos()
+}
+
+// Connect function to button
+const addDeleteCompletedButton = (): void => {
+  const button = document.createElement('button')
+  button.id = 'delete-completed-btn'
+  button.textContent = 'Clear all completed'
+  button.style.display = 'none'
+  button.addEventListener('click', deleteCompletedTodos)
+
+  const container = document.getElementById('todo-container')
+  container?.appendChild(button)
+}
+
+
+addDeleteCompletedButton()
+
+renderTodos()
+
 
 
 
