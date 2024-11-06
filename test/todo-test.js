@@ -28,3 +28,16 @@ test("Deleting a todo", async t => {
     // Assert
     .expect(Selector("#todo-list").childElementCount).eql(1)
 })
+
+test("Marking a todo as done", async t => {
+    await t
+    // Arrange
+    .typeText(Selector("#todo-input"), "Test todo")
+    .click(Selector(".todo-form button[type='submit']"))
+
+    // Act
+    .click(Selector("#completedBtn"))
+
+    // Assert 
+    expect(Selector(".todo-item").getStyleProperty("color")).eql("lightgreen")
+})
