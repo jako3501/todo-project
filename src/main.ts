@@ -38,7 +38,7 @@ const renderTodos = (): void => {
     li.className = `todo-item`
     li.innerHTML = `
     <span>${todo.title}</span>
-    <button>Remove</button>
+    <button id="removeBtn">Remove</button>
     <button id="editBtn">Edit</button>
     <button id="completeBtn">Complete</button>`;
 
