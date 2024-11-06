@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: Test
     container:
-      image: node 16.15.0
+      image: node:16.15.0
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
