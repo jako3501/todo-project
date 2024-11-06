@@ -36,7 +36,7 @@ test("Marking a todo as done", async t => {
     .click(Selector(".todo-form button[type='submit']"))
 
     // Act
-    .click(Selector("#completedBtn"))
+    .click(Selector("#completeBtn"))
 
     // Assert 
     expect(Selector(".todo-item").getStyleProperty("color")).eql("lightgreen")
