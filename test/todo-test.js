@@ -38,8 +38,11 @@ test("Marking a todo as done", async t => {
     // Act
     .click(Selector("#completeBtn"))
 
-    // Assert 
     // Wait for color to change and expect "lightgreen"
+    await t.wait(500);
+
+    // Assert 
+    
     const todoItem = Selector(".todo-item").withText("Test todo");
     await t.expect(todoItem.getStyleProperty("color")).eql("lightgreen");
 })
