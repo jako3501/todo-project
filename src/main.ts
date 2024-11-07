@@ -33,7 +33,15 @@ const addTodo = (text: string): void => {
 const renderTodos = (): void => {
   todoList.innerHTML = ''
 
-  todos.forEach(todo => {
+  // Filter todos based on cuurrent filter state
+  const filteredTodos = todos.filter(todo => {
+    if (filter === 'all') return true
+    if (filter === 'active') return !todo.completed
+    if (filter === 'completed') return todo.completed
+    return true
+  })
+
+  filteredTodos.forEach(todo => {
     const li = document.createElement('li')
     li.className = `todo-item`
     li.innerHTML = `
@@ -148,7 +156,22 @@ addDeleteCompletedButton()
 renderTodos()
 
 
+// Create a function for filtering todos by status
+let filter: 'all' | 'active' | 'completed' = 'all'
 
+// Event listeners for filter buttons
+const filterAllButton = document.getElementById('filter-all') as HTMLButtonElement
+const filterActiveButton = document.getElementById('filter-active') as HTMLButtonElement
+const filterCompletedButton = document.getElementById('filter-completed') as HTMLButtonElement
+
+filterAllButton?.addEventListener('click', () => changeFilter('all'))
+filterActiveButton?.addEventListener('click', () => changeFilter('active'))
+filterCompletedButton?.addEventListener('click', () => changeFilter('completed'))
+
+const changeFilter = (newFilter: 'all' | 'active' | 'completed') => {
+  filter = newFilter
+  renderTodos()
+}
 
 
 
