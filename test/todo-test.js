@@ -48,3 +48,13 @@ test("Test filter todos", async t => {
     .expect(Selector("#todo-list").childElementCount).eql(1)
 
 })
+
+test("Test toggle dark mode", async t => {
+    await t
+    // Arrange + Act
+    .click(Selector("#theme-toggle"))
+
+    // Assert
+    .expect(Selector("body").hasClass("dark")).ok()
+
+})
