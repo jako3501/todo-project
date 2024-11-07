@@ -55,6 +55,6 @@ test("Test toggle dark mode", async t => {
     .click(Selector("#theme-toggle"))
 
     // Assert
-    .expect(Selector("body").hasClass("dark")).ok()
+    .expect(Selector("body").hasClass("dark-mode")).ok()
 
 })
