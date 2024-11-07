@@ -29,20 +29,22 @@ test("Deleting a todo", async t => {
     .expect(Selector("#todo-list").childElementCount).eql(1)
 })
 
-test("Marking a todo as done", async t => {
+test("Test filter todos", async t => {
     await t
     // Arrange
     .typeText(Selector("#todo-input"), "Test todo")
     .click(Selector(".todo-form button[type='submit']"))
 
     // Act
-    .click(Selector("#completeBtn"))
-
-    // Wait for color to change and expect "lightgreen"
-    await t.wait(500);
+    .click(Selector("#filter-completed"))
 
     // Assert 
-    
-    const todoItem = Selector(".todo-item").withText("Test todo");
-    await t.expect(todoItem.getStyleProperty("color")).eql("lightgreen");
+    .expect(Selector("#todo-list").childElementCount).eql(0)
+
+    // Act
+    .click(Selector("#filter-active"))
+
+    // Assert 
+    .expect(Selector("#todo-list").childElementCount).eql(1)
+
 })
