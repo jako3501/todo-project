@@ -173,7 +173,20 @@ const changeFilter = (newFilter: 'all' | 'active' | 'completed') => {
   renderTodos()
 }
 
+// Toggle dark mode function
+const themeToggleButton = document.getElementById('theme-toggle') as HTMLButtonElement
 
+const toggleTheme = () => {
+  document.body.classList.toggle('dark-mode')
+  
+  if (document.body.classList.contains('dark-mode')) {
+    themeToggleButton.textContent = 'Switch to Light Mode';
+  } else {
+    themeToggleButton.textContent = 'Switch to Dark Mode';
+  }
+}
+
+themeToggleButton?.addEventListener('click', toggleTheme)
 
 
 // Create a function for choosing background color for the body with a colorpicker
