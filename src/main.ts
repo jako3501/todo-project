@@ -150,7 +150,6 @@ const addDeleteCompletedButton = (): void => {
   container?.appendChild(button)
 }
 
-
 addDeleteCompletedButton()
 
 renderTodos()
